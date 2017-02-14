@@ -15,7 +15,11 @@ def main():
     try:
         url = args.url or input("Enter web page url to crawl: ")
 
-        crawler.set_depth(int(args.depth) or 3)
+        depth = 3
+        if args.depth:
+            depth = int(args.depth)
+
+        crawler.set_depth(depth)
         crawler.crawl(Job(0, url))
     except KeyboardInterrupt as e:
         print("\nCrawling aborted by user")
