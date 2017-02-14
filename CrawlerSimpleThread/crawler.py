@@ -18,7 +18,7 @@ class Crawler:
         except ValueError as e:
             print("Couldn't parse url: ", job.url, e)
             pass
-        except (requests.ConnectionError, requests.ConnectTimeout) as e:
+        except (requests.ConnectionError, requests.ConnectTimeout, requests.exceptions.SSLError) as e:
             print("Couldn't parse url: ", job.url, e.strerror)
             pass
         else:
@@ -27,6 +27,8 @@ class Crawler:
 
                 if job.priority < self._depth:
                     self.crawl(job)
+
+            linkparser.links.task_done()
 
     def set_depth(self, depth: int):
         self._depth = depth

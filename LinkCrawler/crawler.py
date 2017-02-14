@@ -22,7 +22,7 @@ class Crawler:
         except ValueError as e:
             print("Couldn't parse url: ", job.url, e)
             pass
-        except (requests.ConnectionError, requests.ConnectTimeout) as e:
+        except (requests.ConnectionError, requests.ConnectTimeout, requests.exceptions.SSLError) as e:
             print("Couldn't parse url: ", job.url, e.strerror)
             pass
         else:
