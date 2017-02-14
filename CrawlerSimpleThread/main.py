@@ -1,0 +1,34 @@
+#!/usr/bin/python3
+
+import argparse
+import queue
+
+from crawler import crawler
+from job import Job
+
+links = queue.PriorityQueue();
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--url", help="Web page url to crawl")
+    parser.add_argument("--depth", help="Crawl depth, defaults to 3")
+    args = parser.parse_args()
+
+    try:
+        url = args.url or input("Enter web page url to crawl: ")
+
+        depth = 3
+        if args.depth:
+            depth = int(args.depth)
+
+        crawler.set_depth(depth)
+        crawler.crawl(Job(0, url))
+    except KeyboardInterrupt as e:
+        print("\nOperation aborted by user")
+
+
+if __name__ == '__main__':
+    main()
+else:
+    print("Run from command line.")
