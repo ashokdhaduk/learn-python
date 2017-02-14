@@ -34,6 +34,8 @@ class Crawler:
                 if job.priority < self._depth:
                     self.crawl(job)
 
+            links.task_done()
+
     def set_depth(self, depth: int):
         self._depth = depth
 
