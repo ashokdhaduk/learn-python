@@ -6,7 +6,7 @@ import time
 
 print_lock = threading.Lock()
 
-q = Queue();
+q = Queue()
 
 
 def job(worker):
